@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">Expense<span>Track</span></a>
+    <div class="top-actions">
+      <span id="currentUser" class="current-user"></span>
+      <button id="logoutBtn" class="btn btn-outline hidden" type="button">Log out</button>
+    </div>
+  </header>
+
+  <main class="page">
+    <section id="authSection" class="auth-layout">
+      <div class="intro">
+        <p class="eyebrow">YOUR MONEY, CLEARER</p>
+        <h1>Keep track of every rupee.</h1>
+        <p>Record your spending, understand your habits, and keep your expenses private to your account.</p>
+        <div class="privacy-note"><span>✓</span> Your expenses are linked to your account</div>
+      </div>
+
+      <div class="panel auth-panel">
+        <div class="tabs">
+          <button id="loginTab" class="tab active" type="button">Login</button>
+          <button id="registerTab" class="tab" type="button">Create account</button>
+        </div>
+        <form id="authForm">
+          <div id="nameField" class="field hidden">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" autocomplete="name" minlength="2" />
+          </div>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" minlength="8" required />
+            <small>At least 8 characters</small>
+          </div>
+          <button id="authSubmit" class="btn btn-primary full" type="submit">Login</button>
+          <p id="authMessage" class="message" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <div class="welcome-row">
+        <div>
+          <p class="eyebrow">YOUR DASHBOARD</p>
+          <h1>Expense overview</h1>
+          <p class="muted">Your records are visible only to your signed-in account.</p>
+        </div>
+      </div>
+
+      <div class="summary-grid">
+        <article class="summary-card">
+          <span class="summary-label">Total expenses</span>
+          <strong id="totalAmount">₹0.00</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Transactions</span>
+          <strong id="transactionCount">0</strong>
+        </article>
+        <article class="summary-card">
+          <span class="summary-label">Average expense</span>
+          <strong id="averageAmount">₹0.00</strong>
+        </article>
+      </div>
+
+      <div class="content-grid">
+        <section class="panel">
+          <div class="panel-heading">
+            <div><h2>Add an expense</h2><p class="muted">Enter the details below.</p></div>
+          </div>
+          <form id="expenseForm">
+            <div class="field">
+              <label for="description">Description</label>
+              <input id="description" name="description" placeholder="e.g. Grocery shopping" maxlength="255" required />
+            </div>
+            <div class="form-row">
+              <div class="field">
+                <label for="amount">Amount (₹)</label>
+                <input id="amount" name="amount" type="number" min="0.01" step="0.01" placeholder="500" required />
+              </div>
+              <div class="field">
+                <label for="category">Category</label>
+                <select id="category" name="category">
+                  <option>Food</option><option>Travel</option><option>Shopping</option>
+                  <option>Bills</option><option>Health</option><option>Education</option><option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="date">Date</label>
+              <input id="date" name="date" type="date" required />
+            </div>
+            <button class="btn btn-primary full" type="submit">Add expense</button>
+            <p id="expenseMessage" class="message" role="status"></p>
+          </form>
+        </section>
+
+        <section class="panel expenses-panel">
+          <div class="panel-heading">
+            <div><h2>Recent expenses</h2><p class="muted">Only expenses owned by your account are shown.</p></div>
+            <button id="refreshBtn" class="btn btn-outline" type="button">Refresh</button>
+          </div>
+          <div id="expensesList" class="expenses-list"></div>
+          <p id="listMessage" class="message" role="status"></p>
+        </section>
+      </div>
+    </section>
+    <div id="toast" class="toast hidden" role="status"></div>
+  </main>
+
+  <footer>ExpenseTrack · Built with Express, Sequelize and JWT</footer>
+  <script src="/js/app.js"></script>
+</body>
+</html>
